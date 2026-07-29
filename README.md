@@ -1,6 +1,14 @@
-# API Key Manager
+# Keyline — API Key Manager
 
-A FastAPI service for storing, listing, and deleting API keys for authenticated users. API-key values are encrypted before they are saved to the database, and protected endpoints use JWT bearer tokens.
+Keyline is a full-stack API key manager. The FastAPI backend stores encrypted API keys and hashed passwords; the included responsive frontend provides the landing page, authentication flow, and personal key vault.
+
+## Project structure
+
+```text
+.
+├── backend/       # FastAPI API, database models, encryption, and seed script
+└── frontend/      # Responsive landing page and authenticated vault UI
+```
 
 ## Features
 
@@ -12,7 +20,7 @@ A FastAPI service for storing, listing, and deleting API keys for authenticated 
 
 ## Requirements
 
-- Python 3.10+
+- Python 3.9+
 - A PostgreSQL database (or another database supported by SQLAlchemy)
 
 ## Setup
@@ -36,15 +44,17 @@ TIME_TO_EXPIRE=30
 
 `TIME_TO_EXPIRE` is expressed in minutes. `SECRET_KEY` is also supported for backwards compatibility, but `SECRET` is preferred.
 
-## Run the API
+## Run the application
 
 Start the development server from the project directory:
 
 ```bash
-.venv/bin/python -m uvicorn main:app --reload
+.venv/bin/python -m uvicorn backend.main:app --reload
 ```
 
-The interactive API documentation is available at <http://127.0.0.1:8000/docs>.
+Open <http://127.0.0.1:8000> for the Keyline frontend. The interactive API documentation is at <http://127.0.0.1:8000/docs>.
+
+The backend serves the `frontend/` directory itself, so the sign-up, log-in, add-key, list-key, and delete-key flows work on the same origin. To work on the frontend separately, serve `frontend/` with a local static server; the backend allows common localhost development origins and the UI will use `http://127.0.0.1:8000` automatically.
 
 The application creates its SQLAlchemy tables when it starts. For production, use a dedicated migration workflow instead of relying on automatic table creation.
 
@@ -90,7 +100,7 @@ curl -X POST http://127.0.0.1:8000/new \
 Create 100 repeatable test users and fake encrypted API keys:
 
 ```bash
-.venv/bin/python seed_test_data.py
+.venv/bin/python -m backend.seed_test_data
 ```
 
 All test users use the password `TestPass!2026`. Users `test_user_005`, `test_user_010`, and every fifth user after that have multiple API keys.

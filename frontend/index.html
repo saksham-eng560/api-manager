@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0d0b" />
+    <meta
+      name="description"
+      content="A considered home for the API keys that power your work."
+    />
+    <title>Keyline — API Key Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="landing-page">
+    <div class="grain" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Keyline home">KEY<span>•</span>LINE</a>
+      <nav aria-label="Main navigation">
+        <a href="#what-is-an-api">01 / APIs</a>
+        <a href="#why-keys">02 / Keys</a>
+        <a href="#purpose">03 / Purpose</a>
+      </nav>
+      <a class="header-action" href="#access">Enter vault <span aria-hidden="true">↘</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="eyebrow hero-kicker">PRIVATE ACCESS, CLEAR CONTROL</div>
+        <div class="hero-copy">
+          <p class="hero-index">01—</p>
+          <h1>Every<br /><em>key</em> in<br />one line.</h1>
+        </div>
+        <div class="hero-bottom">
+          <p>KEYLINE is a private control room for the credentials that make your products move.</p>
+          <a class="round-scroll" href="#what-is-an-api" aria-label="Scroll to learn more">
+            <span>SCROLL</span><span aria-hidden="true">↓</span>
+          </a>
+        </div>
+        <div class="hero-orb orb-one" aria-hidden="true"></div>
+        <div class="hero-orb orb-two" aria-hidden="true"></div>
+      </section>
+
+      <section id="what-is-an-api" class="story-section reveal-section">
+        <div class="section-label">01 / THE CONNECTION</div>
+        <div class="story-grid">
+          <h2>APIs let<br />software <em>talk.</em></h2>
+          <div class="story-copy">
+            <p>
+              An API — application programming interface — is the agreed way one service asks another service to do work. Your app can send a payment, call an AI model, or fetch the weather without rebuilding those systems.
+            </p>
+            <p class="mono-note">REQUEST → PERMISSION → RESPONSE</p>
+          </div>
+        </div>
+        <div class="signal-strip" aria-label="Examples of API-powered tasks">
+          <span>PAYMENTS</span><span>AI</span><span>MAPS</span><span>MESSAGING</span><span>ANALYTICS</span>
+        </div>
+      </section>
+
+      <section id="why-keys" class="key-section reveal-section">
+        <div class="section-label">02 / THE PROOF</div>
+        <div class="key-visual" aria-hidden="true">
+          <div class="key-string">sk_live_••••••••••••••••••••••••</div>
+          <div class="key-pulse"></div>
+          <div class="key-ring"></div>
+        </div>
+        <div class="key-copy">
+          <h2>An API key<br />is a <em>passport.</em></h2>
+          <p>
+            It tells a service who is making a request and what they are allowed to use. That makes keys valuable—and worth handling with intention.
+          </p>
+        </div>
+      </section>
+
+      <section id="purpose" class="purpose-section reveal-section">
+        <div class="purpose-intro">
+          <div class="section-label">03 / THE SYSTEM</div>
+          <h2>Less hunting.<br /><em>More building.</em></h2>
+        </div>
+        <div class="purpose-grid">
+          <article>
+            <span>01</span>
+            <h3>Keep it together</h3>
+            <p>See the keys you created in one personal workspace, with the context that makes each one useful.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Store with care</h3>
+            <p>Keys are encrypted before they reach the database. Your password is securely hashed, never stored as plain text.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Stay in control</h3>
+            <p>Add fresh credentials or remove a key by its unique ID whenever your project changes direction.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="access" class="access-section reveal-section">
+        <div class="access-heading">
+          <p class="section-label">04 / YOUR VAULT</p>
+          <h2>Ready when<br />you <em>are.</em></h2>
+          <p>Create an account or return to your keys.</p>
+        </div>
+
+        <div class="auth-panel">
+          <div class="auth-tabs" role="tablist" aria-label="Account access">
+            <button class="auth-tab is-active" role="tab" aria-selected="true" aria-controls="login-panel" id="login-tab" data-auth-tab="login">Log in</button>
+            <button class="auth-tab" role="tab" aria-selected="false" aria-controls="signup-panel" id="signup-tab" data-auth-tab="signup">Sign up</button>
+          </div>
+
+          <div id="login-panel" class="auth-form-wrap is-active" role="tabpanel" aria-labelledby="login-tab" data-auth-panel="login">
+            <form id="login-form" class="auth-form">
+              <label>Username<input name="username" autocomplete="username" required /></label>
+              <label>Password<input name="password" type="password" autocomplete="current-password" required /></label>
+              <button class="solid-button" type="submit"><span>Unlock my keys</span><span aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+
+          <div id="signup-panel" class="auth-form-wrap" role="tabpanel" aria-labelledby="signup-tab" data-auth-panel="signup" hidden>
+            <form id="signup-form" class="auth-form">
+              <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+              <label>Username<input name="username" autocomplete="username" required /></label>
+              <label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" required /></label>
+              <button class="solid-button" type="submit"><span>Create my vault</span><span aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+          <p id="auth-message" class="form-message" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand" href="#top">KEY<span>•</span>LINE</a>
+      <p>YOUR KEYS. YOUR CONTROL.</p>
+      <p>© <span id="year"></span></p>
+    </footer>
+    <script src="./app.js"></script>
+  </body>
+</html>

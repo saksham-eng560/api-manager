@@ -1,12 +1,12 @@
 """Seed the database with repeatable, non-production test data.
 
 Run with:
-    .venv/bin/python seed_test_data.py
+    .venv/bin/python -m backend.seed_test_data
 """
 
-from auth import password_hash
-from crypter import encrypt
-from database import ApiKey, User_data, session
+from .auth import password_hash
+from .crypter import encrypt
+from .database import ApiKey, User_data, session
 
 
 USER_COUNT = 100
@@ -25,12 +25,10 @@ def key_count_for_user(number: int) -> int:
 def seed() -> None:
     created_users = 0
     created_keys = 0
-
     try:
         for number in range(1, USER_COUNT + 1):
             username = f"test_user_{number:03d}"
             user = session.query(User_data).filter_by(username=username).first()
-
             if user is None:
                 user = User_data(
                     username=username,
@@ -47,15 +45,16 @@ def seed() -> None:
                     userid=user.userid, model=f"test-model-{key_number}"
                 ).first()
                 if exists is None:
-                    session.add(ApiKey(
-                        userid=user.userid,
-                        api_key=encrypt(fake_key),
-                        model=f"test-model-{key_number}",
-                        expiry="2099-12-31",
-                        usability="test",
-                    ))
+                    session.add(
+                        ApiKey(
+                            userid=user.userid,
+                            api_key=encrypt(fake_key),
+                            model=f"test-model-{key_number}",
+                            expiry="2099-12-31",
+                            usability="test",
+                        )
+                    )
                     created_keys += 1
-
         session.commit()
     except Exception:
         session.rollback()

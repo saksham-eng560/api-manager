@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0d0b" />
+    <title>My Vault — Keyline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <div class="grain" aria-hidden="true"></div>
+    <header class="site-header dashboard-header">
+      <a class="brand" href="./index.html">KEY<span>•</span>LINE</a>
+      <p class="vault-label">PERSONAL VAULT / <span id="profile-name">LOADING</span></p>
+      <button id="logout-button" class="text-button">Log out <span aria-hidden="true">↗</span></button>
+    </header>
+
+    <main class="vault-main">
+      <section class="vault-hero">
+        <p class="section-label">YOUR API KEY MANAGER</p>
+        <div class="vault-hero-line">
+          <h1>Your<br /><em>keys.</em></h1>
+          <p id="key-count" class="key-count">Loading your vault…</p>
+        </div>
+        <div class="vault-actions">
+          <button class="solid-button add-button" data-dialog-open="create-dialog"><span>Add API key</span><span aria-hidden="true">+</span></button>
+          <button class="outline-button" data-dialog-open="delete-dialog"><span>Delete by ID</span><span aria-hidden="true">−</span></button>
+        </div>
+      </section>
+
+      <section class="keys-section" aria-labelledby="keys-title">
+        <div class="keys-heading">
+          <h2 id="keys-title">Stored credentials</h2>
+          <button id="refresh-button" class="text-button">Refresh <span aria-hidden="true">↻</span></button>
+        </div>
+        <div id="key-list" class="key-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <dialog id="create-dialog" class="key-dialog" aria-labelledby="create-title">
+      <div class="dialog-heading"><p class="section-label">NEW CREDENTIAL</p><button class="dialog-close" data-dialog-close aria-label="Close">×</button></div>
+      <h2 id="create-title">Add an API key.</h2>
+      <form id="create-key-form" class="dialog-form">
+        <label>API key<input name="api_key" autocomplete="off" required /></label>
+        <label>Service / model<input name="model" placeholder="e.g. OpenAI — GPT-4.1" required /></label>
+        <label>Expiry<input name="expiry" type="date" required /></label>
+        <label>Usage / environment<input name="usability" placeholder="e.g. development" required /></label>
+        <button type="submit" class="solid-button"><span>Save encrypted key</span><span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="dialog-hint">The key is encrypted before it is saved to your database.</p>
+    </dialog>
+
+    <dialog id="delete-dialog" class="key-dialog delete-dialog" aria-labelledby="delete-title">
+      <div class="dialog-heading"><p class="section-label">REMOVE CREDENTIAL</p><button class="dialog-close" data-dialog-close aria-label="Close">×</button></div>
+      <h2 id="delete-title">Delete by ID.</h2>
+      <p class="dialog-description">Only a key in your own vault can be removed. This action cannot be undone.</p>
+      <form id="delete-key-form" class="dialog-form">
+        <label>API key ID<input name="api_id" type="number" min="1" inputmode="numeric" required /></label>
+        <label class="check-label"><input name="confirm" type="checkbox" required /><span>I understand this key will be permanently deleted.</span></label>
+        <button type="submit" class="danger-button"><span>Delete key</span><span aria-hidden="true">−</span></button>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./dashboard.js"></script>
+  </body>
+</html>
