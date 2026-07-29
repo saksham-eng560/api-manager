@@ -2,6 +2,10 @@
 
 Keyline is a full-stack API key manager. The FastAPI backend stores encrypted API keys and hashed passwords; the included responsive frontend provides the landing page, authentication flow, and personal key vault.
 
+## Live application
+
+Visit Keyline at [api-manager-p192.onrender.com](https://api-manager-p192.onrender.com).
+
 ## Project structure
 
 ```text
@@ -30,7 +34,7 @@ Create and activate a virtual environment, then install the dependencies:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r backend/requirements.txt
 ```
 
 Create a `.env` file in the project root. Never commit this file.
@@ -52,9 +56,9 @@ Start the development server from the project directory:
 .venv/bin/python -m uvicorn backend.main:app --reload
 ```
 
-Open <http://127.0.0.1:8000> for the Keyline frontend. The interactive API documentation is at <http://127.0.0.1:8000/docs>.
+The deployed application is available at [api-manager-p192.onrender.com](https://api-manager-p192.onrender.com), with API documentation at [api-manager-p192.onrender.com/docs](https://api-manager-p192.onrender.com/docs).
 
-The backend serves the `frontend/` directory itself, so the sign-up, log-in, add-key, list-key, and delete-key flows work on the same origin. To work on the frontend separately, serve `frontend/` with a local static server; the backend allows common localhost development origins and the UI will use `http://127.0.0.1:8000` automatically.
+The backend serves the `frontend/` directory itself, so the sign-up, log-in, add-key, list-key, and delete-key flows run from the same origin.
 
 The application creates its SQLAlchemy tables when it starts. For production, use a dedicated migration workflow instead of relying on automatic table creation.
 
@@ -73,7 +77,7 @@ The application creates its SQLAlchemy tables when it starts. For production, us
 Create an account:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/signup \
+curl -X POST https://api-manager-p192.onrender.com/signup \
   -H 'Content-Type: application/json' \
   -d '{"username":"ada","password":"a-strong-password","email":"ada@example.com"}'
 ```
@@ -81,7 +85,7 @@ curl -X POST http://127.0.0.1:8000/signup \
 Log in. This endpoint expects form data, as required by OAuth2:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/login \
+curl -X POST https://api-manager-p192.onrender.com/login \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'username=ada&password=a-strong-password'
 ```
@@ -89,7 +93,7 @@ curl -X POST http://127.0.0.1:8000/login \
 Store a key, replacing `TOKEN` with the `access_token` returned by login:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/new \
+curl -X POST https://api-manager-p192.onrender.com/new \
   -H 'Authorization: Bearer TOKEN' \
   -H 'Content-Type: application/json' \
   -d '{"api_key":"example-secret-key","model":"gpt-4.1","expiry":"2027-01-01","usability":"development"}'
