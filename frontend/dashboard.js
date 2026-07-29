@@ -1,5 +1,10 @@
 const configuredApiBase = window.API_BASE_URL || "";
-const apiBase = configuredApiBase.replace(/\/$/, "") || (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
+const isSeparateLocalFrontend =
+  ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+  window.location.port !== "8000";
+const apiBase =
+  configuredApiBase.replace(/\/$/, "") ||
+  (isSeparateLocalFrontend ? "http://127.0.0.1:8000" : "");
 const token = sessionStorage.getItem("keylineToken");
 const keyList = document.querySelector("#key-list");
 const toast = document.querySelector("#toast");
